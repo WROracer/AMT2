@@ -30,7 +30,7 @@ jobs:
             -   name: Print Version
                 run: "echo 'New Version: ${{ steps.bump.outputs.version }}'"
 
-    publish-pre:
+    release:
      needs: bump
      runs-on: ubuntu-latest
      steps:
