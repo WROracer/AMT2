@@ -6,7 +6,7 @@
 
     <groupId>de.wroracer</groupId>
     <artifactId>AMT2</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.2-dev0</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
