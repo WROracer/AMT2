@@ -23,7 +23,7 @@ jobs:
                 uses: Plugily-Projects/version-bump-action@v6
                 with:
                     github-token: ${{ secrets.github_token }}
-                    git-committer: 'BOT'
+                    git-username: 'Version-BOT'
                     auto-version-bump: true
             -   name: Print Version
                 run: "echo 'New Version: ${{steps.bump.outputs.version}}'"
