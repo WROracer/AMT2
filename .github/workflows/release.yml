@@ -1,4 +1,4 @@
-name: Master Build
+name: Master Realese
 on:
     push:
         branches: [ master ]
@@ -14,6 +14,8 @@ jobs:
     bump:
         if: "contains(github.event.head_commit.message, '#')"
         runs-on: ubuntu-latest
+        outputs:
+         version: ${{ steps.bump.outputs.version }}
         steps:
             -   name: Checkout Latest Commit
                 uses: actions/checkout@v2
@@ -26,7 +28,7 @@ jobs:
                     git-username: 'Version-BOT'
                     auto-version-bump: true
             -   name: Print Version
-                run: "echo 'New Version: ${{steps.bump.outputs.version}}'"
+                run: "echo 'New Version: ${{ steps.bump.outputs.version }}'"
 
     publish-pre:
      needs: bump
@@ -47,8 +49,8 @@ jobs:
             - uses: "marvinpinto/action-automatic-releases@latest"
               with:
                repo_token: "${{ secrets.GITHUB_TOKEN }}"
-               automatic_release_tag: "${{ jobs.bump.steps.bump.outputs.version }}"
+               automatic_release_tag: "${{ needs.bump.outputs.version }}"
                prerelease: false
-               title: "Version: ${{ jobs.bump.steps.bump.outputs.version }}"
+               title: "Version: ${{ needs.bump.outputs.version }}"
                files: |
                 target/*.jar
